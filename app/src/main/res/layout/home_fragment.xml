@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/menu1"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/imageviewshape"
+        android:drawableTop="@drawable/accessbility_resize"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="경조사"
+        app:layout_constraintBottom_toTopOf="@id/menu3"
+        app:layout_constraintEnd_toStartOf="@id/menu2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/menu2"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/imageviewshape"
+        android:drawableTop="@drawable/direction_run_resize"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="당직근무자"
+        app:layout_constraintBottom_toTopOf="@id/menu4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menu1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <!--    4~6-->
+
+    <Button
+        android:id="@+id/menu3"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/imageviewshape"
+        android:drawableTop="@drawable/date_range_resize"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="일정"
+
+        app:layout_constraintBottom_toTopOf="@id/menu5"
+        app:layout_constraintEnd_toStartOf="@id/menu4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu1"
+
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/menu4"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/imageviewshape"
+        android:drawableTop="@drawable/spaeker_note_resize"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="자유토론방"
+        app:layout_constraintBottom_toTopOf="@id/menu6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menu3"
+        app:layout_constraintTop_toBottomOf="@id/menu2"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/menu5"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/imageviewshape"
+        android:drawableTop="@drawable/table_chart_resize"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="조직도"
+        app:layout_constraintBottom_toTopOf="@id/menu7"
+        app:layout_constraintEnd_toStartOf="@id/menu6"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu3"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/menu6"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/imageviewshape"
+        android:drawableTop="@drawable/text_snippet_resize"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="설문조사"
+        app:layout_constraintBottom_toTopOf="@id/menu8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menu5"
+        app:layout_constraintTop_toBottomOf="@id/menu4"
+
+        tools:ignore="MissingConstraints" />
+
+
+    <!--    7~8-->
+    <Button
+        android:id="@+id/menu7"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/imageviewshape"
+        android:drawableTop="@drawable/check_small_resize"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="다면평가"
+        app:layout_constraintBottom_toTopOf="@id/menu9"
+        app:layout_constraintEnd_toStartOf="@id/menu8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu5"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/menu8"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/imageviewshape"
+        android:drawableTop="@drawable/settings_resize"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="설정"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/menu7"
+        app:layout_constraintTop_toBottomOf="@id/menu6"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/menu9"
+        android:layout_width="180dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/imageviewshape_enabled_false"
+        android:drawableTop="@drawable/warninig_resize"
+        android:enabled="false"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
+        android:text="작업중"
+        app:layout_constraintEnd_toStartOf="@id/menu8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu7"
+        tools:ignore="MissingConstraints" />
+
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:background="@drawable/w_image2"
+        app:layout_constraintStart_toStartOf="@id/menu1"
+        app:layout_constraintTop_toTopOf="@id/homeText"
+
+        />
+
+    <TextView
+        android:id="@+id/homeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="60dp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center_horizontal"
+        android:text="Home"
+        android:textColor="#111111"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/menu1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

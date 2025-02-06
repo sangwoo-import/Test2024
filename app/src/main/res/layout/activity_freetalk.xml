@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingVertical="4dp"
+        app:layout_constraintBottom_toTopOf="@id/FamilyEventTitleSearchEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/FamilyEventMainShow"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="자유토론방"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/FamilyEventCompanyName"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="위니텍"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:textStyle="bold|italic" />
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/FamilyEventTitleSearchEditText"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/edittext_round_cutom"
+        android:backgroundTint="@color/gray"
+        android:hint="제목을 검색해주세요"
+        android:maxLength="15"
+        android:paddingLeft="10dp"
+        android:singleLine="true"
+        android:textCursorDrawable="@drawable/color_cursor"
+        app:layout_constraintBottom_toTopOf="@id/FamilyEventRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linear1" />
+
+    <ImageButton
+        android:id="@+id/FamilyEventCancelBtn"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/baseline_cancel_24"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/FamilyEventSearchBtn"
+        app:layout_constraintTop_toTopOf="@id/FamilyEventTitleSearchEditText"
+
+
+        />
+
+    <ImageButton
+        android:id="@+id/FamilyEventSearchBtn"
+        android:layout_width="34dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="4dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/baseline_search_24"
+        app:layout_constraintEnd_toEndOf="@id/FamilyEventTitleSearchEditText"
+        app:layout_constraintTop_toTopOf="@id/FamilyEventTitleSearchEditText" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/FamilyEventRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/FamilyEventTitleSearchEditText">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:id="@+id/progressBarLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:id="@+id/loginProgressbar"
+            style="?android:attr/progressBarStyleLargeInverse"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:indeterminate="true"
+            android:indeterminateTint="#3DA2D0"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="잠시만 기다려주세요." />
+    </LinearLayout>
+
+
+    <!--    Infinite Loading progressbar-->
+    <ProgressBar
+        android:id="@+id/infiniteLoadingProgressbar"
+        style="?android:attr/progressBarStyleLargeInverse"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:indeterminate="true"
+        android:indeterminateTint="#3DA2D0"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/upFloatingBtn"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/black"
+        android:src="@drawable/baseline_arrow_upward_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

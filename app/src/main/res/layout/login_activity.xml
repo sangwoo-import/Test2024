@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/loginTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="로그인"
+        android:textColor="#111111"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:clickable="true"
+        android:id="@+id/loginLogoImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/w2image"
+        app:layout_constraintStart_toStartOf="@id/loginTextview"
+        app:layout_constraintTop_toBottomOf="@id/loginTextview" />
+
+    <TextView
+        android:id="@+id/hiTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="안녕하세요."
+        android:textColor="#111111"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/loginLogoImage"
+        app:layout_constraintTop_toBottomOf="@id/loginLogoImage" />
+
+    <TextView
+        android:id="@+id/companyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:text="위니텍입니다."
+        android:textColor="#111111"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/loginLogoImage"
+        app:layout_constraintTop_toBottomOf="@id/hiTextView" />
+
+    <TextView
+        android:id="@+id/guideTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="회원 서비스 이용을 위해 로그인 해주세요."
+        android:textColor="#111111"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/loginLogoImage"
+        app:layout_constraintTop_toBottomOf="@id/companyTextView" />
+
+    <EditText
+        android:id="@+id/idEditText"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
+        android:backgroundTint="@color/black"
+        android:ellipsize="end"
+        android:hint="아이디"
+        android:maxLength="15"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@drawable/color_cursor"
+        app:layout_constraintStart_toStartOf="@id/guideTextView"
+        app:layout_constraintTop_toBottomOf="@id/guideTextView" />
+
+    <EditText
+        android:maxLength="15"
+        android:id="@+id/pwEditText"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:backgroundTint="@color/black"
+        android:ellipsize="end"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@drawable/color_cursor"
+        app:layout_constraintStart_toStartOf="@id/guideTextView"
+        app:layout_constraintTop_toBottomOf="@id/idEditText" />
+
+    <ImageButton
+        android:id="@+id/hideAndShowImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="335dp"
+        android:clickable="true"
+        app:layout_constraintStart_toStartOf="@id/pwEditText"
+        android:background="@color/ic_launcher_background"
+        android:src="@drawable/visibility_lock_24px"
+        app:layout_constraintBottom_toBottomOf="@id/pwEditText"
+        app:layout_constraintTop_toTopOf="@id/pwEditText"
+
+        />
+
+
+    <LinearLayout
+        android:id="@+id/linearItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/pwEditText"
+        app:layout_constraintStart_toStartOf="@id/pwEditText"
+        app:layout_constraintTop_toBottomOf="@id/pwEditText"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="아이디찾기" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="3dp"
+            android:text="|"
+            android:textSize="16dp"
+            tools:ignore="Suspicious0dp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+
+            android:text="비밀번호 찾기" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="3dp"
+            android:text="|"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="회원가입" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewLogin"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="90dp"
+        android:background="#D0CBCB"
+        app:layout_constraintTop_toBottomOf="@id/linearItem"
+        tools:ignore="MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/loginbuttonshape"
+        android:gravity="center"
+        android:text="로그인하기"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewLogin"
+        tools:ignore="MissingConstraints" />
+
+    <!--    progressbar-->
+        <LinearLayout
+            android:id="@+id/progressBarLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <ProgressBar
+                android:id="@+id/loginProgressbar"
+                style="?android:attr/progressBarStyleLargeInverse"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:indeterminate="true"
+                android:indeterminateTint="#3DA2D0"
+                android:visibility="visible"
+                tools:ignore="Suspicious0dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="로그인 중"
+                tools:ignore="Suspicious0dp" />
+        </LinearLayout>
+
+    <!--    coil 및 glide 사용-->
+<!--    <LinearLayout-->
+<!--        android:id="@+id/progressBarLinearLayout2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:ignore="MissingConstraints">-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/progressImageView"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_weight="1" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_weight="1"-->
+<!--            android:gravity="center"-->
+<!--            android:text="로그인 중"-->
+<!--            tools:ignore="Suspicious0dp" />-->
+<!--    </LinearLayout>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView1"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp">
+
+            <ImageView
+                android:id="@+id/letterImageView2"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/letter_saw_24px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4" />
+
+            <ImageView
+                android:id="@+id/letterImageView"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/baseline_letter_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.4" />
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/userProfileImageView"-->
+            <!--                android:layout_width="80dp"-->
+            <!--                android:layout_height="80dp"-->
+            <!--                android:src="@drawable/baseline_smart_toy_24"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <ImageView
+                android:id="@+id/passWordIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/baseline_lock_24"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.1" />
+
+            <TextView
+                android:id="@+id/letterTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:text="제목"
+                android:textColor="#111111"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintVertical_bias="0.3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sendUserShow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="보낸사람: "
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/sendDateShow"
+                app:layout_constraintStart_toStartOf="@id/letterTitleTextView"
+                app:layout_constraintTop_toBottomOf="@id/letterTitleTextView" />
+
+            <TextView
+                android:id="@+id/sendUserNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="김상우"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/sendUserShow"
+                app:layout_constraintStart_toEndOf="@id/sendUserShow"
+                app:layout_constraintTop_toTopOf="@id/sendUserShow" />
+
+            <TextView
+                android:id="@+id/sendDateShow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="보낸날짜: "
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/sendUserShow"
+                app:layout_constraintStart_toStartOf="@id/sendUserShow"
+                app:layout_constraintTop_toBottomOf="@id/sendUserShow" />
+
+            <TextView
+                android:id="@+id/sendDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2025.10.24"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/sendDateShow"
+                app:layout_constraintStart_toEndOf="@id/sendDateShow"
+                app:layout_constraintTop_toTopOf="@id/sendDateShow" />
+
+
+
+            <TextView
+                android:id="@+id/letterSawShow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="수신여부: "
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/sendDateShow"
+                app:layout_constraintStart_toStartOf="@id/sendDateShow"
+                app:layout_constraintTop_toBottomOf="@id/sendDateShow" />
+
+            <TextView
+                android:id="@+id/letterSaw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="읽지않음"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/letterSawShow"
+                app:layout_constraintStart_toEndOf="@id/letterSawShow"
+                app:layout_constraintTop_toTopOf="@id/letterSawShow" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

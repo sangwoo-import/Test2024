@@ -33,12 +33,14 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
 }
 
 dependencies {
+    implementation("androidx.appcompat:appcompat:1.6.1'")
+    implementation("androidx.activity:activity:1.8.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -48,4 +50,36 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    implementation("com.google.android.material:material:1.9.0")
+
+    /* Okhttp, Retrofit */
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+
+
+    /*Gson*/
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.google.code.gson:gson:2.8.6")
+
+    /*Coil*/
+    implementation("io.coil-kt:coil:2.2.2")
+    implementation("io.coil-kt:coil-gif:2.2.2") // Coil에서 GIF를 지원하는 라이브러리
+
+    /*Glide*/
+    implementation("com.github.bumptech.glide:glide:4.13.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.13.0")
+
+
+    /* bottomNavigation */
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    /*CardView*/
+    implementation("androidx.cardview:cardview:1.0.0")
+
+
+    /*Coroutine*/
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 }

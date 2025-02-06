@@ -2,6 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--    Http 보안 정책-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+
+
+
+<!--    갤러리 및 사진 촬영 저장-->
+    <uses-permission android:name="android.permission.CAMERA"
+        tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" />
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,16 +27,57 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTest2024"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+
+<!--        사진 provider 설정-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.mytest2024.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name="com.example.mytest2024.RecyclerView.RecyclerViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.SplashActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.LetterActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.example.mytest2024.FreeTalkActivity" />
+        <activity android:name="com.example.mytest2024.BoardDetailActivity" />
+        <activity android:name="com.example.mytest2024.FamilyEventActivity" />
+        <activity android:name="com.example.mytest2024.BoardDetailFamilyActivity" />
+        <activity android:name="com.example.mytest2024.SurveyActivity" />
+        <activity android:name="com.example.mytest2024.SurveyDetailActivity" />
+        <activity android:name="com.example.mytest2024.LetterDetailActivity" />
     </application>
 
 </manifest>

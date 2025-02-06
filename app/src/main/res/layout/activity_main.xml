@@ -22,11 +22,14 @@
     </TextView>
 
     <EditText
+        android:maxLength="10"
         android:id="@+id/idEditText"
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:ellipsize="end"
         android:hint="아이디를 입력하세요"
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/LoginTextview">
@@ -35,21 +38,25 @@
 
     <EditText
         android:id="@+id/pwEditText"
-        android:layout_width="250dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:ellipsize="end"
         android:hint="비밀번호를 입력해주세요."
+        android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/idEditText">
 
     </EditText>
-
+    <!--    width는 match에서 0dp로 변경-->
     <LinearLayout
         android:id="@+id/linearItem"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/pwEditText"
+        app:layout_constraintStart_toStartOf="@id/pwEditText"
         app:layout_constraintTop_toBottomOf="@id/pwEditText"
         tools:ignore="MissingConstraints">
 
@@ -88,8 +95,10 @@
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="250dp"
+        android:backgroundTint="#EBDE5C"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:background="@drawable/shape"
         android:text="로그인"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +110,8 @@
 
     <Button
         android:id="@+id/registerBtn"
-        android:layout_width="250dp"
+        android:backgroundTint="#EBDE5C"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:background="@drawable/shape"
@@ -113,49 +123,6 @@
 
     </Button>
 
-    <!--    fragment만들때 -->
-
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/fragment_btn1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <Button
-        android:id="@+id/homeBtn"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@id/fragment_btn1"
-        android:text="Home"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintStart_toStartOf="parent">
-
-    </Button>
-
-    <Button
-        android:id="@+id/fragment_btn1"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="Btn1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/fragment_btn2"
-        app:layout_constraintStart_toEndOf="@id/homeBtn">
-
-    </Button>
-
-    <Button
-        android:id="@+id/fragment_btn2"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="Btn2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/fragment_btn1">
-
-    </Button>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
