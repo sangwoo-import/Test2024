@@ -1,7 +1,7 @@
 package com.example.mytest2024.RecyclerView
 
 import android.widget.CheckBox
-import com.example.mytest2024.SwaggerAPI.Retrofit.SurveyOptionListResponse
+import com.example.mytest2024.swaggerapi.Retrofit.SurveyOptionListResponse
 
 
 import android.annotation.SuppressLint
@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytest2024.R
 
-import com.example.mytest2024.SwaggerAPI.Retrofit.SurveyAnswerSaveQuestionRequestData
-import com.example.mytest2024.SwaggerAPI.SurveyInformation
+import com.example.mytest2024.swaggerapi.Retrofit.SurveyAnswerSaveQuestionRequestData
+import com.example.mytest2024.swaggerapi.SurveyInformation
 
 
 // view : item_list 를 의미
@@ -82,7 +82,6 @@ class GaekSurveyRecyclerVIewAdapter(
         if (curData.answerAt.equals("Y") && selectedPosition == -1) {
             // 선택 된 position 값을 현재 position 값으로 변경
             selectedPosition = holder.adapterPosition
-
         }
 
 
@@ -95,7 +94,6 @@ class GaekSurveyRecyclerVIewAdapter(
         // 선택 상태 설정  각 아이템 갯수 만큼 지정
         // 아예 처음 일때
         holder.questionOptionContent.isChecked =
-
             if (surveyType.equals("N")) {
 
                 holder.adapterPosition == selectedPosition

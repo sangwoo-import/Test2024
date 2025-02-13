@@ -7,22 +7,22 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.mytest2024.SwaggerAPI.DeviceInformation.DeviceInfo
-import com.example.mytest2024.SwaggerAPI.SwaggerController.LoginProvider
-import com.example.mytest2024.SwaggerAPI.LoginUserInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.LoginRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.LoginResponse
+import com.example.mytest2024.swaggerapi.DeviceInformation.DeviceInfo
+import com.example.mytest2024.swaggerapi.swaggercontroller.LoginProvider
+import com.example.mytest2024.swaggerapi.LoginUserInformation
+import com.example.mytest2024.swaggerapi.Retrofit.LoginRequestData
 import com.example.mytest2024.databinding.LoginActivityBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class LoginActivity : AppCompatActivity(), LoginProvider.CallBack {
+class LoginActivity : AppCompatActivity() {
 
-
+    /* ViewModel 객체 생성 */
+    private val viewModel by viewModels<LoginProvider>()
     var backPressedTime: Long = 0   // 뒤로 가기 했을 때 한번더 누를 시간
-    private val loginProvider = LoginProvider(this)
 
     private var isPassWord = true  // 기본 pw 숨기기 imageButton 색상
 
@@ -119,70 +119,131 @@ class LoginActivity : AppCompatActivity(), LoginProvider.CallBack {
     }
 
     fun requestLogin(loginRequestDataSet: LoginRequestData) {
-        loginProvider.sendLogin(loginRequestDataSet)
-    }
+        viewModel.sendLogin(loginRequestDataSet)
 
-    // response call back 값
-    override fun completeLogin(
-        code: String,
-        msg: String,
-        data: List<LoginResponse>
-    ) {
-        codeA = code
-        messageA = msg
+        viewModel.getLoginResponse.observe(this) { data ->
 
-        if (codeA.equals("100")) {
+            codeA = data.resultCode
+            messageA = data.resultMsg
 
-            for (dataItem in data) {
-                userSnA = dataItem.userSn
-                userNameA = dataItem.userName
-                wardNmA = dataItem.wardNm
-                classNmA = dataItem.classNm
-            }
 
-            /* 싱글톤 패턴 사용자 정보 담기 */
-            LoginUserInformation.saveUserInfo(userNameA, wardNmA, classNmA, userSnA)
+            if (codeA.equals("100")) {
 
-            binding.progressBarLinearLayout.visibility = View.VISIBLE
-            /*이미지 로딩*/
-//            Glide.with(this@LoginActivity).load("file:///android_asset/loading_animation.gif")
-//                .into(binding.progressImageView)
-
-            lifecycleScope.launch {
-                delay(2000)
-                Toast.makeText(this@LoginActivity, "로그인의" + messageA + "했습니다!", Toast.LENGTH_SHORT)
-                    .show()
-
-                binding.progressBarLinearLayout.visibility = View.GONE
-                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-                intent.apply {
-                    startActivity(intent)
-                    finish()
+                for (dataItem in data.resultData) {
+                    userSnA = dataItem.userSn
+                    userNameA = dataItem.userName
+                    wardNmA = dataItem.wardNm
+                    classNmA = dataItem.classNm
                 }
 
+                /* 싱글톤 패턴 사용자 정보 담기 */
+                LoginUserInformation.saveUserInfo(userNameA, wardNmA, classNmA, userSnA)
+
+                binding.progressBarLinearLayout.visibility = View.VISIBLE
+
+
+                lifecycleScope.launch {
+                    delay(2000)
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "로그인의" + messageA + "했습니다!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    binding.progressBarLinearLayout.visibility = View.GONE
+                    val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+                    intent.apply {
+                        startActivity(intent)
+                        finish()
+                    }
+
+                }
+
+            } else if (codeA.equals("E100")) {
+                Log.d("error!!", codeA + ": " + messageA)
+                binding.loginBtn.isEnabled = true
+                Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
+                    .show()
+
+            } else if (codeA.equals("E600")) {
+                Log.d("error!!", codeA + ": " + messageA)
+                binding.loginBtn.isEnabled = true
+                Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                Log.d("error!!", codeA + ": " + messageA)
+                binding.loginBtn.isEnabled = true
+                Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
+                    .show()
+
             }
 
-        } else if (codeA.equals("E100")) {
-            Log.d("error!!", codeA + ": " + messageA)
-            binding.loginBtn.isEnabled = true
-            Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
-                .show()
-
-        } else if (codeA.equals("E600")) {
-            Log.d("error!!", codeA + ": " + messageA)
-            binding.loginBtn.isEnabled = true
-            Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
-                .show()
-        } else {
-            Log.d("error!!", codeA + ": " + messageA)
-            binding.loginBtn.isEnabled = true
-            Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
-                .show()
 
         }
 
-
     }
+
+    // response call back 값
+    //override fun completeLogin(
+    //  code: String,
+    //  msg: String,
+    //  data: List<LoginResponse>
+    // ) {
+    //codeA = code
+    // messageA = msg
+
+//        if (codeA.equals("100")) {
+//
+//            for (dataItem in data) {
+//                userSnA = dataItem.userSn
+//                userNameA = dataItem.userName
+//                wardNmA = dataItem.wardNm
+//                classNmA = dataItem.classNm
+//            }
+//
+//            /* 싱글톤 패턴 사용자 정보 담기 */
+//            LoginUserInformation.saveUserInfo(userNameA, wardNmA, classNmA, userSnA)
+//
+//            binding.progressBarLinearLayout.visibility = View.VISIBLE
+//            /*이미지 로딩*/
+////            Glide.with(this@LoginActivity).load("file:///android_asset/loading_animation.gif")
+////                .into(binding.progressImageView)
+//
+//            lifecycleScope.launch {
+//                delay(2000)
+//                Toast.makeText(this@LoginActivity, "로그인의" + messageA + "했습니다!", Toast.LENGTH_SHORT)
+//                    .show()
+//
+//                binding.progressBarLinearLayout.visibility = View.GONE
+//                val intent = Intent(this@LoginActivity, HomeActivity::class.java)
+//                intent.apply {
+//                    startActivity(intent)
+//                    finish()
+//                }
+//
+//            }
+//
+//        } else if (codeA.equals("E100")) {
+//            Log.d("error!!", codeA + ": " + messageA)
+//            binding.loginBtn.isEnabled = true
+//            Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
+//                .show()
+//
+//        } else if (codeA.equals("E600")) {
+//            Log.d("error!!", codeA + ": " + messageA)
+//            binding.loginBtn.isEnabled = true
+//            Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
+//                .show()
+//        } else {
+//            Log.d("error!!", codeA + ": " + messageA)
+//            binding.loginBtn.isEnabled = true
+//            Toast.makeText(this@LoginActivity, messageA, Toast.LENGTH_SHORT)
+//                .show()
+//
+//        }
+
+
+    //}
 
 
 }

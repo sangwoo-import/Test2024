@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytest2024.SwaggerAPI.Retrofit.SearchPerson
-import com.example.mytest2024.SwaggerAPI.SearchUserInformation
+import com.example.mytest2024.swaggerapi.Retrofit.SearchPerson
+import com.example.mytest2024.swaggerapi.SearchUserInformation
 import com.example.mytest2024.R
 import com.example.mytest2024.SearchPersonDetailFragment
 

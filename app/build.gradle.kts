@@ -35,7 +35,12 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
+
     }
+
+
+
 }
 
 dependencies {
@@ -82,4 +87,21 @@ dependencies {
 
     /*Coroutine*/
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
+
+    /* viewModel */
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    /* LiveData */
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+
+    /* 생체 인증 */
+    implementation ("androidx.biometric:biometric:1.1.0")
+
+    /* LifeCycle 감지 */
+    implementation ("androidx.lifecycle:lifecycle-process:2.5.1")
+    
+
+
+
+
+
 }

@@ -1,7 +1,7 @@
 package com.example.mytest2024.RecyclerView
 
 import android.app.AlertDialog
-import com.example.mytest2024.SwaggerAPI.Retrofit.LetterResponse
+import com.example.mytest2024.swaggerapi.Retrofit.LetterResponse
 
 import android.content.Context
 import android.content.Intent
@@ -12,13 +12,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.mytest2024.LetterDetailActivity
-import com.example.mytest2024.SwaggerAPI.LetterInformation
+import com.example.mytest2024.swaggerapi.LetterInformation
 import com.example.mytest2024.R
-import com.example.mytest2024.SurveyDetailActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -175,7 +172,6 @@ class LetterRecyclerViewAdapter(
             )
             isPasswordVisibilityToggleEnabled = true
         }
-
         val passwordInput = TextInputEditText(context).apply {
             inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             hint = "비밀번호를 입력하세요."
@@ -183,12 +179,10 @@ class LetterRecyclerViewAdapter(
         }
         textInputLayout.addView(passwordInput)
 
-
         val dialog = AlertDialog.Builder(context)
             .setTitle("비밀번호를 입력해주세요.")
             .setView(textInputLayout)
             .setPositiveButton("확인") { dial, which ->
-
                 val password = passwordInput.text.toString()
 
                 /* 상세조회에 필요한 pw 저장 */

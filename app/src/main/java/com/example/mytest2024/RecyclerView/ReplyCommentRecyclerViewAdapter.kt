@@ -10,8 +10,7 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytest2024.R
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardCommentListData
-import com.example.mytest2024.SwaggerAPI.Retrofit.ChildResponseData
+import com.example.mytest2024.swaggerapi.Retrofit.ChildResponseData
 
 // view : item_list 를 의미
 // 수정 하기 위한 이미지뷰 , text 가져옴 , 홀더 = 객체 저장 용도

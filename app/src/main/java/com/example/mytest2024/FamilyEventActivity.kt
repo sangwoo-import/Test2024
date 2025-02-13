@@ -11,16 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytest2024.RecyclerView.FamilyEventRecyclerViewAdapter
-import com.example.mytest2024.RecyclerView.FreeTalkRecyclerViewAdapter
-import com.example.mytest2024.SwaggerAPI.FamilyEventInformation
-import com.example.mytest2024.SwaggerAPI.FreeTalkInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.FamilyEventRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.FamilyEventResponse
-import com.example.mytest2024.SwaggerAPI.Retrofit.FreeTalkRequestData
-import com.example.mytest2024.SwaggerAPI.SwaggerController.FamilyEventProvider
-import com.example.mytest2024.SwaggerAPI.SwaggerController.FreeTalkProvider
+import com.example.mytest2024.swaggerapi.FamilyEventInformation
+import com.example.mytest2024.swaggerapi.Retrofit.FamilyEventRequestData
+import com.example.mytest2024.swaggerapi.Retrofit.FamilyEventResponse
+import com.example.mytest2024.swaggerapi.swaggercontroller.FamilyEventProvider
 import com.example.mytest2024.databinding.ActivityFamilyEventBinding
-import com.example.mytest2024.databinding.ActivityFreetalkBinding
 
 class FamilyEventActivity : AppCompatActivity(), FamilyEventProvider.CallBack {
 

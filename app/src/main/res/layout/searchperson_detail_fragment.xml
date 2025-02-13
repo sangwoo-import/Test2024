@@ -147,7 +147,6 @@
                 android:layout_marginStart="16dp"
                 android:autoLink="phone"
                 android:clickable="true"
-                android:fontFamily="@font/roboto_medium"
                 android:linksClickable="true"
                 android:text="111-1111-1111"
                 android:textColor="@color/black"

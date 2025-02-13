@@ -7,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytest2024.BoardDetailActivity
 import com.example.mytest2024.BoardDetailFamilyActivity
 import com.example.mytest2024.R
-import com.example.mytest2024.SwaggerAPI.FamilyEventInformation
-import com.example.mytest2024.SwaggerAPI.FreeTalkInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.FamilyEventResponse
-import com.example.mytest2024.SwaggerAPI.Retrofit.FreeTalkResponse
+import com.example.mytest2024.swaggerapi.FamilyEventInformation
+import com.example.mytest2024.swaggerapi.Retrofit.FamilyEventResponse
 
 class FamilyEventCustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     var freeTalkUserName = view.findViewById<TextView>(R.id.familyEventUserName)

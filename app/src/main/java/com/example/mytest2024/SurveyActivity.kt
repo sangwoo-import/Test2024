@@ -10,17 +10,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytest2024.RecyclerView.LetterRecyclerViewAdapter
 import com.example.mytest2024.RecyclerView.SurveyRecyclerViewAdapter
-import com.example.mytest2024.SwaggerAPI.LetterInformation
-import com.example.mytest2024.SwaggerAPI.LoginUserInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.LetterRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.SurveyRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.SurveyResponse
-import com.example.mytest2024.SwaggerAPI.SurveyInformation
-import com.example.mytest2024.SwaggerAPI.SwaggerController.LetterProvider
-import com.example.mytest2024.SwaggerAPI.SwaggerController.SurveyProvider
-import com.example.mytest2024.databinding.ActivityLetterBinding
+import com.example.mytest2024.swaggerapi.LoginUserInformation
+import com.example.mytest2024.swaggerapi.Retrofit.SurveyRequestData
+import com.example.mytest2024.swaggerapi.Retrofit.SurveyResponse
+import com.example.mytest2024.swaggerapi.SurveyInformation
+import com.example.mytest2024.swaggerapi.swaggercontroller.SurveyProvider
 import com.example.mytest2024.databinding.ActivitySurveyBinding
 
 class SurveyActivity : AppCompatActivity(), SurveyProvider.CallBack {

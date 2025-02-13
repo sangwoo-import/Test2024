@@ -12,17 +12,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
-import com.example.mytest2024.SwaggerAPI.SwaggerController.SearchPersonDetailProvider
-import com.example.mytest2024.SwaggerAPI.Retrofit.SearchPersonDetail
-import com.example.mytest2024.SwaggerAPI.Retrofit.SearchPersonDetailRequestData
-import com.example.mytest2024.SwaggerAPI.SearchUserInformation
-import com.example.mytest2024.SwaggerAPI.SearchUserInformation.userSn
+import com.example.mytest2024.swaggerapi.swaggercontroller.SearchPersonDetailProvider
+import com.example.mytest2024.swaggerapi.Retrofit.SearchPersonDetail
+import com.example.mytest2024.swaggerapi.Retrofit.SearchPersonDetailRequestData
+import com.example.mytest2024.swaggerapi.SearchUserInformation
+import com.example.mytest2024.swaggerapi.SearchUserInformation.userSn
 import com.example.mytest2024.databinding.SearchpersonDetailFragmentBinding
-import kotlin.math.truncate
 
 class SearchPersonDetailFragment : DialogFragment(), SearchPersonDetailProvider.CallBack {
 
@@ -198,15 +196,6 @@ class SearchPersonDetailFragment : DialogFragment(), SearchPersonDetailProvider.
                 binding.email.text = emailA
                 binding.email.linksClickable = true
             }
-
-
-            /*TODO(" X 클릭시 dialogFragment dismiss 하기*/
-
-
-
-
-
-
 
 
             /* 오류 분기 처리*/

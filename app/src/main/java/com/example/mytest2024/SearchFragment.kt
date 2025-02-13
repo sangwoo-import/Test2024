@@ -7,14 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytest2024.SwaggerAPI.SwaggerController.SearchPersonProvider
-import com.example.mytest2024.SwaggerAPI.SearchUserInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.SearchPerson
-import com.example.mytest2024.SwaggerAPI.Retrofit.SearchPersonRequestData
+import com.example.mytest2024.swaggerapi.swaggercontroller.SearchPersonProvider
+import com.example.mytest2024.swaggerapi.SearchUserInformation
+import com.example.mytest2024.swaggerapi.Retrofit.SearchPerson
+import com.example.mytest2024.swaggerapi.Retrofit.SearchPersonRequestData
 import com.example.mytest2024.RecyclerView.SearchPersonRecylerViewAdapter
 import com.example.mytest2024.databinding.SearchFragmentBinding
 
@@ -114,7 +113,7 @@ class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
             // 다시 초기화 시킬려고
             lastRowNUm = 0
 
-            // 어댑터 초기화
+            // 어댑터 초기화  -> 이름을 검색하던 빈값을 검색하던 한번 다시 초기화 하고 표출 하기 위해서
             adapter.reset()
             val searchPersonRequestDataSet2 = SearchPersonRequestData(
                 binding.searchPersonEditText.text.toString(),
@@ -183,6 +182,8 @@ class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
 
 
                 // 무한 스크롤 -> 밑에 도달 하면서 멈추면(Scroll_State_IDLE)   다시 API 호출
+                // 리스트가 더 이상 아래로 스크롤 되지 않을 때 && 스크롤이 멈출 때
+                // vertical  0이 젤위 젤  밑이 1
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE
                 ) {
 
@@ -192,6 +193,8 @@ class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
                         binding.infiniteLoadingProgressbar.visibility = View.VISIBLE
                         lastRowNUm += pageSize
                         val nextPageRequestData = SearchPersonRequestData(
+                            // 이름이 있던 없던 간에 계속 호출 할때는 검색창에 이름이 유지 되어야
+                            // 같은 이름으로 호출 할 수 있으니깐
                             keyword = binding.searchPersonEditText.text.toString(),
                             searchType,
                             pageSize,
@@ -210,15 +213,6 @@ class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
         binding.upFloatingBtn.setOnClickListener {
             binding.searchPersonrecyclerView.smoothScrollToPosition(0)
         }
-
-
-
-
-
-
-
-
-
 
 
         return binding.root // root는 contraint 전체를 뜻한다

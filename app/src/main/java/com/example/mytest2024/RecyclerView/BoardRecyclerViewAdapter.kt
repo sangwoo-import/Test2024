@@ -3,7 +3,6 @@ package com.example.mytest2024.RecyclerView
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.util.Linkify
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +11,10 @@ import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytest2024.R
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardCommentListData
-import com.example.mytest2024.SwaggerAPI.Retrofit.ChildResponseData
+import com.example.mytest2024.swaggerapi.Retrofit.BoardCommentListData
 
 
- class BoardDetailCustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class BoardDetailCustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val boardDetailUserName: TextView = view.findViewById(R.id.familyEventUserName)
     val boardDetailRegisterDate: TextView = view.findViewById(R.id.familyEventRegisterDate)
     val boardDetailComment: TextView = view.findViewById(R.id.freeTalkComment)

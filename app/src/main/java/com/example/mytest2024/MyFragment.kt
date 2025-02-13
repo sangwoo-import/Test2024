@@ -21,7 +21,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -29,13 +28,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import coil.clear
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.mytest2024.SwaggerAPI.SwaggerController.LogoutProvider
-import com.example.mytest2024.SwaggerAPI.LoginUserInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.LogoutRequestData
+import com.example.mytest2024.swaggerapi.LoginUserInformation
+import com.example.mytest2024.swaggerapi.Retrofit.LogoutRequestData
 import com.example.mytest2024.databinding.MyFragmentBinding
+import com.example.mytest2024.swaggerapi.swaggercontroller.LogoutProvider
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
@@ -70,7 +68,6 @@ class MyFragment : Fragment(), LogoutProvider.CallBack {
 
         /*로그아웃 cardview 또는 화살표 */
         binding.logoutImageButton.setOnClickListener {
-
             dialogMessageBox()
         }
 
@@ -332,6 +329,7 @@ class MyFragment : Fragment(), LogoutProvider.CallBack {
             binding.myPageProfileImageview.setImageResource(R.drawable.baseline_person_24)
             val sharedPref = requireActivity().getSharedPreferences("MyGallery", Context.MODE_PRIVATE)
             with(sharedPref.edit()) {
+                // 기본 이미지도 앱 에서 유지 시킬려고
                 putString("profile_image_path", null)
                 apply()
             }
@@ -350,6 +348,7 @@ class MyFragment : Fragment(), LogoutProvider.CallBack {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        // 천천히 올라오는 Animation 적용
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
         dialog.window?.setGravity(Gravity.BOTTOM)
 

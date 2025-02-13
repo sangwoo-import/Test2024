@@ -10,14 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytest2024.RecyclerView.BoardRecyclerViewAdapter
-import com.example.mytest2024.SwaggerAPI.FamilyEventInformation
-import com.example.mytest2024.SwaggerAPI.FreeTalkInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardCommentListData
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardDetailRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardDetailResponse
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardFileListData
-import com.example.mytest2024.SwaggerAPI.SwaggerController.BoardDetailProvider
-import com.example.mytest2024.databinding.ActivityBoardDetailBinding
+import com.example.mytest2024.swaggerapi.FamilyEventInformation
+import com.example.mytest2024.swaggerapi.Retrofit.BoardCommentListData
+import com.example.mytest2024.swaggerapi.Retrofit.BoardDetailRequestData
+import com.example.mytest2024.swaggerapi.Retrofit.BoardDetailResponse
+import com.example.mytest2024.swaggerapi.Retrofit.BoardFileListData
+import com.example.mytest2024.swaggerapi.swaggercontroller.BoardDetailProvider
 import com.example.mytest2024.databinding.ActivityBoardDetailFamilyBinding
 
 class BoardDetailFamilyActivity : AppCompatActivity(), BoardDetailProvider.CallBack {

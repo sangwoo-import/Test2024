@@ -21,12 +21,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:clickable="true"
         android:id="@+id/loginLogoImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/w2image"
+        android:clickable="true"
         app:layout_constraintStart_toStartOf="@id/loginTextview"
         app:layout_constraintTop_toBottomOf="@id/loginTextview" />
 
@@ -83,7 +83,6 @@
         app:layout_constraintTop_toBottomOf="@id/guideTextView" />
 
     <EditText
-        android:maxLength="15"
         android:id="@+id/pwEditText"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
@@ -92,6 +91,7 @@
         android:ellipsize="end"
         android:hint="비밀번호"
         android:inputType="textPassword"
+        android:maxLength="15"
         android:singleLine="true"
         android:textColor="@color/black"
         android:textCursorDrawable="@drawable/color_cursor"
@@ -103,11 +103,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="335dp"
-        android:clickable="true"
-        app:layout_constraintStart_toStartOf="@id/pwEditText"
         android:background="@color/ic_launcher_background"
+        android:clickable="true"
         android:src="@drawable/visibility_lock_24px"
         app:layout_constraintBottom_toBottomOf="@id/pwEditText"
+        app:layout_constraintStart_toStartOf="@id/pwEditText"
         app:layout_constraintTop_toTopOf="@id/pwEditText"
 
         />
@@ -190,67 +190,67 @@
         tools:ignore="MissingConstraints" />
 
     <!--    progressbar-->
-        <LinearLayout
-            android:id="@+id/progressBarLinearLayout"
+    <LinearLayout
+        android:id="@+id/progressBarLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <ProgressBar
+            android:id="@+id/loginProgressbar"
+            style="?android:attr/progressBarStyleLargeInverse"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:indeterminate="true"
+            android:indeterminateTint="#3DA2D0"
+            android:visibility="visible"
+            tools:ignore="Suspicious0dp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints">
-
-            <ProgressBar
-                android:id="@+id/loginProgressbar"
-                style="?android:attr/progressBarStyleLargeInverse"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:indeterminate="true"
-                android:indeterminateTint="#3DA2D0"
-                android:visibility="visible"
-                tools:ignore="Suspicious0dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="로그인 중"
-                tools:ignore="Suspicious0dp" />
-        </LinearLayout>
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="로그인 중"
+            tools:ignore="Suspicious0dp" />
+    </LinearLayout>
 
     <!--    coil 및 glide 사용-->
-<!--    <LinearLayout-->
-<!--        android:id="@+id/progressBarLinearLayout2"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:ignore="MissingConstraints">-->
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/progressBarLinearLayout2"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:orientation="vertical"-->
+    <!--        android:visibility="gone"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        tools:ignore="MissingConstraints">-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/progressImageView"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_weight="1" />-->
+    <!--        <ImageView-->
+    <!--            android:id="@+id/progressImageView"-->
+    <!--            android:layout_width="50dp"-->
+    <!--            android:layout_height="50dp"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:layout_weight="1" />-->
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_weight="1"-->
-<!--            android:gravity="center"-->
-<!--            android:text="로그인 중"-->
-<!--            tools:ignore="Suspicious0dp" />-->
-<!--    </LinearLayout>-->
+    <!--        <TextView-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_gravity="center_horizontal"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:gravity="center"-->
+    <!--            android:text="로그인 중"-->
+    <!--            tools:ignore="Suspicious0dp" />-->
+    <!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,11 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytest2024.SwaggerAPI.LetterInformation
-import com.example.mytest2024.SwaggerAPI.SwaggerController.LetterProvider
-import com.example.mytest2024.SwaggerAPI.LoginUserInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.LetterRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.LetterResponse
+import com.example.mytest2024.swaggerapi.LetterInformation
+import com.example.mytest2024.swaggerapi.swaggercontroller.LetterProvider
+import com.example.mytest2024.swaggerapi.LoginUserInformation
+import com.example.mytest2024.swaggerapi.Retrofit.LetterRequestData
+import com.example.mytest2024.swaggerapi.Retrofit.LetterResponse
 import com.example.mytest2024.RecyclerView.LetterRecyclerViewAdapter
 import com.example.mytest2024.databinding.ActivityLetterBinding
 

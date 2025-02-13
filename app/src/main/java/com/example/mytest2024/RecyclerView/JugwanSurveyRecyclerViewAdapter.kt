@@ -1,18 +1,17 @@
-import com.example.mytest2024.SwaggerAPI.Retrofit.SurveyOptionListResponse
+import com.example.mytest2024.swaggerapi.Retrofit.SurveyOptionListResponse
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
-import android.text.util.Linkify
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytest2024.R
-import com.example.mytest2024.SwaggerAPI.Retrofit.SurveyAnswerSaveQuestionRequestData
-import com.example.mytest2024.SwaggerAPI.SurveyInformation
+import com.example.mytest2024.swaggerapi.Retrofit.SurveyAnswerSaveQuestionRequestData
+import com.example.mytest2024.swaggerapi.SurveyInformation
 
 // view : item_list 를 의미
 // 수정 하기 위한 이미지뷰 , text 가져옴 , 홀더 = 객체 저장 용도
@@ -51,7 +50,7 @@ class JugwanSurveyRecyclerViewAdapter(
 
         var curData = dataSet[position]
 
-        /*답변이 완료 된거이면 체크박스 비활성화*/
+        /*답변이 완료 된거면 EditText 비활성화*/
 
         if(answerAt.equals("Y")){
             holder.surveyJugwanContent.isEnabled = false

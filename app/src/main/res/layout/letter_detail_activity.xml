@@ -1,197 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/letterDetailConstraint"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.mytest2024.swaggerapi.swaggercontroller.LetterDetailProvider" />
 
-    <TextView
-        android:id="@+id/letter"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/letterDetailConstraint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:gravity="center_horizontal"
-        android:paddingVertical="16dp"
-        android:text="편지함"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
 
-    <TextView
-        android:id="@+id/letterTitleShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:text="제목: "
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/letter" />
-
-    <TextView
-        android:id="@+id/letterTitleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="제목이름"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toEndOf="@id/letterTitleShow"
-        app:layout_constraintTop_toTopOf="@id/letterTitleShow" />
-
-    <TextView
-        android:id="@+id/sendUserShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="보낸사람: "
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/letterTitleShow"
-        app:layout_constraintTop_toBottomOf="@id/letterTitleShow" />
-
-    <TextView
-        android:id="@+id/sendUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="김상우"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/sendUserShow"
-        app:layout_constraintStart_toStartOf="@id/letterTitleTextView"
-        app:layout_constraintTop_toTopOf="@id/sendUserShow" />
-
-    <TextView
-        android:id="@+id/recipientUserShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="받은사람: "
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/sendUserShow"
-        app:layout_constraintTop_toBottomOf="@id/sendUserShow" />
-
-    <TextView
-        android:id="@+id/recipientUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="위니김상우"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/sendUser"
-        app:layout_constraintTop_toTopOf="@id/recipientUserShow" />
-
-    <TextView
-        android:id="@+id/carbonCopyUserShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="참조자: "
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/recipientUserShow"
-        app:layout_constraintTop_toBottomOf="@id/recipientUserShow" />
-
-    <TextView
-        android:id="@+id/carbonCopyUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="친구들"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/carbonCopyUserShow"
-        app:layout_constraintStart_toStartOf="@id/recipientUser"
-        app:layout_constraintTop_toTopOf="@id/carbonCopyUserShow" />
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/carbonCopyUserShow"
-        tools:ignore="MissingConstraints" />
-
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@id/view2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/view">
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/letter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/black"
+            android:gravity="center_horizontal"
+            android:paddingVertical="16dp"
+            android:text="편지함"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/letterContent"
+
+        <TextView
+            android:id="@+id/letterTitleShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="제목: "
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/letter" />
+
+        <TextView
+            android:id="@+id/letterTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{viewModel.letterDetail!=null? viewModel.letterDetail.letterTitle:`데이터 없음`}"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toEndOf="@id/letterTitleShow"
+            app:layout_constraintTop_toTopOf="@id/letterTitleShow" />
+
+        <TextView
+            android:id="@+id/sendUserShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="보낸사람: "
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/letterTitleShow"
+            app:layout_constraintTop_toBottomOf="@id/letterTitleShow" />
+
+        <TextView
+            android:id="@+id/sendUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.letterDetail!=null? viewModel.letterDetail.senderUserName : `데이터없음`}"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/sendUserShow"
+            app:layout_constraintStart_toStartOf="@id/letterTitleTextView"
+            app:layout_constraintTop_toTopOf="@id/sendUserShow" />
+
+        <TextView
+            android:id="@+id/recipientUserShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="받은사람: "
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/sendUserShow"
+            app:layout_constraintTop_toBottomOf="@id/sendUserShow" />
+
+        <TextView
+            android:id="@+id/recipientUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.letterDetail!=null? viewModel.letterDetail.recipientUser.toString() :`데이터없음`}"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/sendUser"
+            app:layout_constraintTop_toTopOf="@id/recipientUserShow" />
+
+        <TextView
+            android:id="@+id/carbonCopyUserShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="참조자: "
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/recipientUserShow"
+            app:layout_constraintTop_toBottomOf="@id/recipientUserShow" />
+
+        <TextView
+            android:id="@+id/carbonCopyUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.letterDetail!=null? viewModel.letterDetail.carbonCopyUser.toString(): `데이터없음`}"
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/carbonCopyUserShow"
+            app:layout_constraintStart_toStartOf="@id/recipientUser"
+            app:layout_constraintTop_toTopOf="@id/carbonCopyUserShow" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/carbonCopyUserShow"
+            tools:ignore="MissingConstraints" />
+
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toTopOf="@id/view2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                tools:text="dsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowif
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/letterContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:text="@{viewModel.letterDetail!=null? viewModel.letterDetail.letterContent.toString() : `내용없음`}"
+                    tools:text="dsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowif
                 jqiowfjowiqfjoiqwfjoiqqowifjqiowfjowiqfjoiqwfjoiqqowifjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfidsadqfkqwfioqwfjqiowfjowiqfjoiqwfjoiqqowifjqoiwfjqiwfqwjofijqwfi" />
 
 
-        </LinearLayout>
+            </LinearLayout>
 
-    </ScrollView>
-
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="140dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/filenameShow"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="파일이름: "
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/carbonCopyUserShow"
-        app:layout_constraintTop_toBottomOf="@id/view2" />
-
-    <TextView
-        android:id="@+id/filename"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto_medium"
-        android:text="파일 이름들"
-        android:textColor="@color/black"
-        android:textSize="14dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/filenameShow"
-        app:layout_constraintTop_toTopOf="@id/filenameShow" />
+        </ScrollView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="140dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/filenameShow"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="파일이름: "
+            android:textColor="@color/black"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/carbonCopyUserShow"
+            app:layout_constraintTop_toBottomOf="@id/view2" />
+
+        <TextView
+            android:id="@+id/filename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/black"
+            android:text="파일"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/filenameShow"
+            app:layout_constraintTop_toTopOf="@id/filenameShow" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

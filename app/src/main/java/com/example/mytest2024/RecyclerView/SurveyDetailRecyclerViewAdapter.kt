@@ -1,7 +1,7 @@
 package com.example.mytest2024.RecyclerView
 
 import JugwanSurveyRecyclerViewAdapter
-import com.example.mytest2024.SwaggerAPI.Retrofit.SurveyQuestionList
+import com.example.mytest2024.swaggerapi.Retrofit.SurveyQuestionList
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -14,9 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytest2024.R
-import com.example.mytest2024.SwaggerAPI.SurveyInformation
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 
 
 /* 현재 전체 질문 리스트 보여주는 Adapter*/
@@ -34,7 +31,7 @@ class SurveyDetailRecyclerViewAdapter(
     // 원래는 List
     var dataSet: MutableList<SurveyQuestionList>,
     val context: Context,
-    var answerAt : String
+    var answerAt: String
 ) : RecyclerView.Adapter<SurveyDetailCustomViewHolder>() {
 
 
@@ -60,9 +57,9 @@ class SurveyDetailRecyclerViewAdapter(
         var curData = dataSet[position]
 
 
+        /* 질문 번호 및 질문 내용 */
         holder.surveyQuestionSn.text = curData.surveyQuestionSn + "."
         holder.surveyQuestionNm.text = curData.questionNm
-
 
 
         /*객관식 주관식 recyclerview 생성 */
@@ -76,10 +73,17 @@ class SurveyDetailRecyclerViewAdapter(
                 surveyQuestionRecyclerview.visibility = View.GONE
             } else {
                 /* 멀티 체크 여부 보내기 */
-                println("firstGaekMultiCheck "+curData.multiCheckAt)
+                println("firstGaekMultiCheck " + curData.multiCheckAt)
                 surveyQuestionRecyclerview.layoutManager =
                     LinearLayoutManager(holder.itemView.context)
-                val gaekAdapter = GaekSurveyRecyclerVIewAdapter(curData.optionList, context,curData.multiCheckAt,answerAt)
+
+
+                val gaekAdapter = GaekSurveyRecyclerVIewAdapter(
+                    curData.optionList,
+                    context,
+                    curData.multiCheckAt,
+                    answerAt
+                )
                 surveyQuestionRecyclerview.adapter = gaekAdapter
                 surveyQuestionRecyclerview.visibility = View.VISIBLE
             }
@@ -92,11 +96,19 @@ class SurveyDetailRecyclerViewAdapter(
                 surveyQuestionRecyclerview.visibility = View.GONE
             } else {
                 /* 멀티 체크 여부 보내기 저장 */
-                println("firstJugwanMultiCheck "+curData.multiCheckAt)
+                println("firstJugwanMultiCheck " + curData.multiCheckAt)
 
                 surveyQuestionRecyclerview.layoutManager =
                     LinearLayoutManager(holder.itemView.context)
-                val jugwanAdapter = JugwanSurveyRecyclerViewAdapter(curData.optionList, context,curData.multiCheckAt,answerAt)
+
+
+
+                val jugwanAdapter = JugwanSurveyRecyclerViewAdapter(
+                    curData.optionList,
+                    context,
+                    curData.multiCheckAt,
+                    answerAt
+                )
 
                 surveyQuestionRecyclerview.adapter = jugwanAdapter
                 surveyQuestionRecyclerview.visibility = View.VISIBLE

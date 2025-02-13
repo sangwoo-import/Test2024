@@ -11,15 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytest2024.RecyclerView.FreeTalkRecyclerViewAdapter
-import com.example.mytest2024.RecyclerView.LetterRecyclerViewAdapter
-import com.example.mytest2024.SwaggerAPI.FreeTalkInformation
-import com.example.mytest2024.SwaggerAPI.LetterInformation
-import com.example.mytest2024.SwaggerAPI.LoginUserInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.FreeTalkRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.FreeTalkResponse
-import com.example.mytest2024.SwaggerAPI.Retrofit.LetterRequestData
-import com.example.mytest2024.SwaggerAPI.SwaggerController.FreeTalkProvider
-import com.example.mytest2024.SwaggerAPI.SwaggerController.LetterProvider
+import com.example.mytest2024.swaggerapi.FreeTalkInformation
+import com.example.mytest2024.swaggerapi.Retrofit.FreeTalkRequestData
+import com.example.mytest2024.swaggerapi.Retrofit.FreeTalkResponse
+import com.example.mytest2024.swaggerapi.swaggercontroller.FreeTalkProvider
 import com.example.mytest2024.databinding.ActivityFreetalkBinding
 
 class FreeTalkActivity : AppCompatActivity(), FreeTalkProvider.CallBack {
@@ -242,7 +237,6 @@ class FreeTalkActivity : AppCompatActivity(), FreeTalkProvider.CallBack {
                 hasMoreData = true
                 // 데이터가 있으면 어댑터에 추가
                 adapter.addData(resultData)
-
 
             }
 

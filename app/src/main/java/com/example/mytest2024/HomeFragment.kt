@@ -66,6 +66,14 @@ class HomeFragment : Fragment() {
             }
         }
 
+        /* 설정 기능 */
+        binding.menu8.setOnClickListener {
+            val intent = Intent(requireActivity(), SettingActivity::class.java)
+            intent.apply {
+                startActivity(intent)
+            }
+        }
+
 
 
 

@@ -10,12 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mytest2024.RecyclerView.BoardRecyclerViewAdapter
-import com.example.mytest2024.SwaggerAPI.FreeTalkInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardCommentListData
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardDetailRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardDetailResponse
-import com.example.mytest2024.SwaggerAPI.Retrofit.BoardFileListData
-import com.example.mytest2024.SwaggerAPI.SwaggerController.BoardDetailProvider
+import com.example.mytest2024.swaggerapi.FreeTalkInformation
+import com.example.mytest2024.swaggerapi.Retrofit.BoardCommentListData
+import com.example.mytest2024.swaggerapi.Retrofit.BoardDetailRequestData
+import com.example.mytest2024.swaggerapi.Retrofit.BoardDetailResponse
+import com.example.mytest2024.swaggerapi.Retrofit.BoardFileListData
+import com.example.mytest2024.swaggerapi.swaggercontroller.BoardDetailProvider
 import com.example.mytest2024.databinding.ActivityBoardDetailBinding
 
 class BoardDetailActivity : AppCompatActivity(), BoardDetailProvider.CallBack {
@@ -25,7 +25,6 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailProvider.CallBack {
     private val boardDetailProvider = BoardDetailProvider(this@BoardDetailActivity)
 
     private lateinit var adapter: BoardRecyclerViewAdapter
-
 
 
     /*Response data */
@@ -57,18 +56,13 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailProvider.CallBack {
         recyclerView.layoutManager = LinearLayoutManager(this@BoardDetailActivity)
         // adapter 붙어주기에 만든 data를 붙여주기 + context
 
-            adapter = BoardRecyclerViewAdapter(mutableListOf(), this@BoardDetailActivity)
-            recyclerView.adapter = adapter
-
-
-
-
+        adapter = BoardRecyclerViewAdapter(mutableListOf(), this@BoardDetailActivity)
+        recyclerView.adapter = adapter
 
 
         // 통신 타이밍 안맞아서 먼저 보여주고 바뀌니깐
         // 일단 여기들어오면 바로 안보이게 하고 성공과 실패되면 보여주고 안보여주고 할려고
         binding.boardDetailScrollView.visibility = View.GONE
-
 
 
         /*request Data*/
@@ -121,6 +115,7 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailProvider.CallBack {
                 sadCountA = dateItem.emtcnSad
                 loveCountA = dateItem.emtcnLove
                 bestCountA = dateItem.emtcnBest
+
             }
 
 
@@ -176,8 +171,7 @@ class BoardDetailActivity : AppCompatActivity(), BoardDetailProvider.CallBack {
             }
 
 
-        }
-        else{
+        } else {
             binding.boardDetailScrollView.visibility = View.GONE
             Log.d("error!!", codeA + ": " + messageA)
             Toast.makeText(this@BoardDetailActivity, messageA, Toast.LENGTH_SHORT).show()

@@ -13,20 +13,25 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
-import com.example.mytest2024.SwaggerAPI.LetterInformation
-import com.example.mytest2024.SwaggerAPI.LoginUserInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.FileListData
-import com.example.mytest2024.SwaggerAPI.Retrofit.LetterDetailRequestData
-import com.example.mytest2024.SwaggerAPI.Retrofit.LetterDetailResponse
-import com.example.mytest2024.SwaggerAPI.SwaggerController.LetterDetailProvider
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.example.mytest2024.swaggerapi.LetterInformation
+import com.example.mytest2024.swaggerapi.LoginUserInformation
+import com.example.mytest2024.swaggerapi.Retrofit.FileListData
+import com.example.mytest2024.swaggerapi.Retrofit.LetterDetailRequestData
+import com.example.mytest2024.swaggerapi.swaggercontroller.LetterDetailProvider
 import com.example.mytest2024.databinding.LetterDetailActivityBinding
 
 
-class LetterDetailActivity : AppCompatActivity(), LetterDetailProvider.CallBack {
+class LetterDetailActivity : AppCompatActivity() {
+
+    /* ViewModel 객체 생성 */
+//    private val viewModels by viewModels<LetterDetailProvider>()
+
+    private lateinit var letterViewModel : LetterDetailProvider
 
     private lateinit var binding: LetterDetailActivityBinding
 
-    private val letterDetailProvider = LetterDetailProvider(this@LetterDetailActivity)
 
     /*response Data */
     private var codeA: String = ""
@@ -38,14 +43,28 @@ class LetterDetailActivity : AppCompatActivity(), LetterDetailProvider.CallBack 
     private var recipientUserA: String = ""
     private var carbonCopyUserA: String = ""
 
+    private var fileListData: List<FileListData> = listOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = LetterDetailActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        binding = LetterDetailActivityBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+
+
+        binding = DataBindingUtil.setContentView(this, R.layout.letter_detail_activity)
+        letterViewModel = ViewModelProvider(this).get(LetterDetailProvider::class.java)
+
+        with(binding){
+            lifecycleOwner = this@LetterDetailActivity
+            viewModel = letterViewModel
+        }
+
 
         // 통신 타이밍 안맞아서 먼저 보여주고 바뀌니깐
+
         // 일단 여기들어오면 바로 안보이게 하고 성공과 실패되면 보여주고 안보여주고 할려고
         binding.letterDetailConstraint.visibility = View.GONE
+
 
         /* Request Data */
 
@@ -65,124 +84,230 @@ class LetterDetailActivity : AppCompatActivity(), LetterDetailProvider.CallBack 
 
 
     fun letterDetailRequest(letterDetailRequestDataSet: LetterDetailRequestData) {
-        letterDetailProvider.letterDetailGo(letterDetailRequestDataSet)
-    }
-
-    override fun completeLetterDetail(
-        code: String,
-        msg: String,
-        resultData: List<LetterDetailResponse>,
-        fileListData: List<FileListData>
-    ) {
-        codeA = code
-        messageA = msg
-
-        // 성공하면 화면 보이게
-        binding.letterDetailConstraint.visibility = View.VISIBLE
+        letterViewModel.letterDetailGo(letterDetailRequestDataSet)
 
 
 
-        if (codeA.equals("100")) {
-            Log.d("success", codeA + ": " + messageA)
+        letterViewModel.getLetterDetailResponse.observe(this) { data ->
+
+            codeA = data.resultCode
+            messageA = data.resultMsg
+
+            // 성공하면 화면 보이게
+            binding.letterDetailConstraint.visibility = View.VISIBLE
 
 
 
-            for (dataItem in resultData) {
-                letterTitleA = dataItem.letterTitle
-                sendUserNameA = dataItem.senderUserName
-                letterContentA = dataItem.letterContent
+            if (codeA.equals("100")) {
+                Log.d("success", codeA + ": " + messageA)
 
-                // 복습
-                recipientUserA = dataItem.recipientUser.joinToString(",")
-                carbonCopyUserA = dataItem.carbonCopyUser.joinToString(",")
+                val dataItem = data.resultData.firstOrNull()
 
-            }
+                if (dataItem != null) {
+                    letterTitleA = dataItem.letterTitle
+                    sendUserNameA = dataItem.senderUserName
+                    letterContentA = dataItem.letterContent
 
-
-            // 텍스트 클릭 활성화
-            binding.filename.movementMethod = LinkMovementMethod.getInstance()
-            val spannableBuilder = SpannableStringBuilder()
-            // 파일 String 값 활성화
-            fileListData.forEachIndexed { index, fileData ->
-                val fileName = fileData.fileName
-                val spannable = SpannableString(fileName)
-
-                spannable.setSpan(object : ClickableSpan() {
-                    override fun onClick(widget: View) {
-                        // 이벤트 처리(TODO 지금은 String만 출력 -> 나중에 클릭했을 때 이벤트 추가하자)
-
-                        widget.setOnClickListener { }
-                    }
-
-                    override fun updateDrawState(ds: TextPaint) {
-                        super.updateDrawState(ds)
-
-                        ds.isUnderlineText = true
-                        ds.color = Color.BLACK
-                        ds.bgColor = Color.TRANSPARENT
-                    }
-                }, 0, fileName.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-                spannableBuilder.append(spannable)
-
-                if (index != fileListData.size - 1) {
-                    spannableBuilder.append(", ")
+                    // 복습
+                    recipientUserA = dataItem.recipientUser.joinToString(",")
+                    carbonCopyUserA = dataItem.carbonCopyUser.joinToString(",")
+                    fileListData = dataItem.fileList
                 }
 
-            }
+
+                // 텍스트 클릭 활성화
+                binding.filename.movementMethod = LinkMovementMethod.getInstance()
+                val spannableBuilder = SpannableStringBuilder()
+                // 파일 String 값 활성화
+                fileListData.forEachIndexed { index, fileData ->
+                    val fileName = fileData.fileName
+                    val spannable = SpannableString(fileName)
+
+                    spannable.setSpan(object : ClickableSpan() {
+                        override fun onClick(widget: View) {
+                            // 이벤트 처리(TODO 지금은 String만 출력 -> 나중에 클릭했을 때 이벤트 추가하자)
+
+                            widget.setOnClickListener { }
+                        }
+
+                        override fun updateDrawState(ds: TextPaint) {
+                            super.updateDrawState(ds)
+
+                            ds.isUnderlineText = true
+                            ds.color = Color.BLACK
+                            ds.bgColor = Color.TRANSPARENT
+                        }
+                    }, 0, fileName.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+                    spannableBuilder.append(spannable)
+
+                    if (index != fileListData.size - 1) {
+                        spannableBuilder.append(", ")
+                    }
+
+                }
 
 
 
+                if (letterTitleA.isNullOrEmpty()) {
+                    binding.letterTitleTextView.text = "데이터 없음"
+                }
+                if (sendUserNameA.isNullOrEmpty()) {
+                    binding.sendUser.text = "데이터 없음"
+                }
+                if (recipientUserA.isNullOrEmpty()) {
+                    binding.recipientUser.text = "데이터 없음"
+                }
+                if (carbonCopyUserA.isNullOrEmpty()) {
+                    binding.carbonCopyUser.text = "데이터 없음"
+                }
+                if (letterContentA.isNullOrEmpty()) {
+                    binding.letterContent.text = "내용 없음"
+                }
+
+                else {
+                    binding.letterContent.text = HtmlCompat.fromHtml(
+                        letterContentA,
+                        HtmlCompat.FROM_HTML_MODE_LEGACY
+                    )
+                }
+                // 파일
+                if (spannableBuilder.isNullOrEmpty()) {
+                    binding.filename.text = "내용 없음"
+                } else {
+                    binding.filename.text = spannableBuilder
+
+                }
 
 
-
-            if (letterTitleA.isNullOrEmpty()) {
-                binding.letterTitleTextView.text = "데이터 없음"
             } else {
-                binding.letterTitleTextView.text = letterTitleA
-            }
-            if (sendUserNameA.isNullOrEmpty()) {
-                binding.sendUser.text = "데이터 없음"
-            } else {
-                binding.sendUser.text = sendUserNameA
-            }
-
-            if (recipientUserA.isNullOrEmpty()) {
-                binding.recipientUser.text = "데이터 없음"
-            } else {
-                binding.recipientUser.text = recipientUserA
-            }
-            if (carbonCopyUserA.isNullOrEmpty()) {
-                binding.carbonCopyUser.text = "데이터 없음"
-            } else {
-                binding.carbonCopyUser.text = carbonCopyUserA
-            }
-            if (letterContentA.isNullOrEmpty()) {
-                binding.letterContent.text = "내용 없음"
-            } else {
-                binding.letterContent.text = HtmlCompat.fromHtml(
-                    letterContentA,
-                    HtmlCompat.FROM_HTML_MODE_LEGACY
-                )
-            }
-            // 파일
-            if (spannableBuilder.isNullOrEmpty()) {
-                binding.filename.text = "내용 없음"
-            } else {
-                binding.filename.text = spannableBuilder
+                // 비번 안 맞으면 아예 안보이게
+                binding.letterDetailConstraint.visibility = View.GONE
+                Log.d("error!!", codeA + ": " + messageA)
+                Toast.makeText(this@LetterDetailActivity, messageA, Toast.LENGTH_SHORT).show()
 
             }
-
-
-        } else {
-            // 비번 안 맞으면 아예 안보이게
-            binding.letterDetailConstraint.visibility = View.GONE
-            Log.d("error!!", codeA + ": " + messageA)
-            Toast.makeText(this@LetterDetailActivity, messageA, Toast.LENGTH_SHORT).show()
-
         }
 
+
+
     }
+
+//    override fun completeLetterDetail(
+//        code: String,
+//        msg: String,
+//        resultData: List<LetterDetailResponse>,
+//        fileListData: List<FileListData>
+//    ) {
+//        codeA = code
+//        messageA = msg
+//
+//        // 성공하면 화면 보이게
+//        binding.letterDetailConstraint.visibility = View.VISIBLE
+//
+//
+//
+//        if (codeA.equals("100")) {
+//            Log.d("success", codeA + ": " + messageA)
+//
+//
+//
+//            for (dataItem in resultData) {
+//                letterTitleA = dataItem.letterTitle
+//                sendUserNameA = dataItem.senderUserName
+//                letterContentA = dataItem.letterContent
+//
+//                // 복습
+//                recipientUserA = dataItem.recipientUser.joinToString(",")
+//                carbonCopyUserA = dataItem.carbonCopyUser.joinToString(",")
+//
+//            }
+//
+//
+//            // 텍스트 클릭 활성화
+//            binding.filename.movementMethod = LinkMovementMethod.getInstance()
+//            val spannableBuilder = SpannableStringBuilder()
+//            // 파일 String 값 활성화
+//            fileListData.forEachIndexed { index, fileData ->
+//                val fileName = fileData.fileName
+//                val spannable = SpannableString(fileName)
+//
+//                spannable.setSpan(object : ClickableSpan() {
+//                    override fun onClick(widget: View) {
+//                        // 이벤트 처리(TODO 지금은 String만 출력 -> 나중에 클릭했을 때 이벤트 추가하자)
+//
+//                        widget.setOnClickListener { }
+//                    }
+//
+//                    override fun updateDrawState(ds: TextPaint) {
+//                        super.updateDrawState(ds)
+//
+//                        ds.isUnderlineText = true
+//                        ds.color = Color.BLACK
+//                        ds.bgColor = Color.TRANSPARENT
+//                    }
+//                }, 0, fileName.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+//
+//                spannableBuilder.append(spannable)
+//
+//                if (index != fileListData.size - 1) {
+//                    spannableBuilder.append(", ")
+//                }
+//
+//            }
+//
+//
+//
+//
+//
+//
+//            if (letterTitleA.isNullOrEmpty()) {
+//                binding.letterTitleTextView.text = "데이터 없음"
+//            } else {
+//                binding.letterTitleTextView.text = letterTitleA
+//            }
+//            if (sendUserNameA.isNullOrEmpty()) {
+//                binding.sendUser.text = "데이터 없음"
+//            } else {
+//                binding.sendUser.text = sendUserNameA
+//            }
+//
+//            if (recipientUserA.isNullOrEmpty()) {
+//                binding.recipientUser.text = "데이터 없음"
+//            } else {
+//                binding.recipientUser.text = recipientUserA
+//            }
+//            if (carbonCopyUserA.isNullOrEmpty()) {
+//                binding.carbonCopyUser.text = "데이터 없음"
+//            } else {
+//                binding.carbonCopyUser.text = carbonCopyUserA
+//            }
+//            if (letterContentA.isNullOrEmpty()) {
+//                binding.letterContent.text = "내용 없음"
+//            } else {
+//                binding.letterContent.text = HtmlCompat.fromHtml(
+//                    letterContentA,
+//                    HtmlCompat.FROM_HTML_MODE_LEGACY
+//                )
+//            }
+//            // 파일
+//            if (spannableBuilder.isNullOrEmpty()) {
+//                binding.filename.text = "내용 없음"
+//            } else {
+//                binding.filename.text = spannableBuilder
+//
+//            }
+//
+//
+//        } else {
+//            // 비번 안 맞으면 아예 안보이게
+//            binding.letterDetailConstraint.visibility = View.GONE
+//            Log.d("error!!", codeA + ": " + messageA)
+//            Toast.makeText(this@LetterDetailActivity, messageA, Toast.LENGTH_SHORT).show()
+//
+//        }
+//
+//    }
 
 
 }

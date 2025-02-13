@@ -5,16 +5,12 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytest2024.BoardDetailActivity
 import com.example.mytest2024.R
 import com.example.mytest2024.SurveyDetailActivity
-import com.example.mytest2024.SwaggerAPI.FreeTalkInformation
-import com.example.mytest2024.SwaggerAPI.Retrofit.FreeTalkResponse
-import com.example.mytest2024.SwaggerAPI.Retrofit.SurveyResponse
-import com.example.mytest2024.SwaggerAPI.SurveyInformation
+import com.example.mytest2024.swaggerapi.Retrofit.SurveyResponse
+import com.example.mytest2024.swaggerapi.SurveyInformation
 
 
 // view : item_list 를 의미
