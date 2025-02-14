@@ -86,7 +86,26 @@ class FamilyEventActivity : AppCompatActivity(), FamilyEventProvider.CallBack {
                     binding.FamilyEventCancelBtn.visibility = View.GONE
                 }
             }
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                /* 이 조건은 글자 다 지웠을 때 바로 조회 안할려고 버튼 기능에 대한 역할을 줄려고 -> 그냥 글자
+                 다 지워도 되고 */
+                if(!s.isNullOrEmpty()&& s.length>1) {
+                    // 입력 실시간
+                    lastRowNUm = 0
+
+                    // 어댑터 초기화  -> 이름을 검색하던 빈값을 검색하던 한번 다시 초기화 하고 표출 하기 위해서
+                    adapter.reset()
+                    val familyEventRequestData3 = FamilyEventRequestData(
+
+                        binding.FamilyEventTitleSearchEditText.text.toString(),
+                        pageSize,
+                        lastRowNUm
+
+                    )
+                    requestFamilyEvent(familyEventRequestData3)
+                }
+
+            }
 
         }
         )
@@ -233,7 +252,7 @@ class FamilyEventActivity : AppCompatActivity(), FamilyEventProvider.CallBack {
 
             if (resultData.isNullOrEmpty()) {
                 hasMoreData = false
-                Toast.makeText(this@FamilyEventActivity, "데이터없음", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@FamilyEventActivity, "데이터없음", Toast.LENGTH_SHORT).show()
                 // 데이터가 없으면
 
             } else {

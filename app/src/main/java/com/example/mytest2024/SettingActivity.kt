@@ -26,17 +26,17 @@ class SettingActivity : AppCompatActivity() {
 
         val sharedPref = getSharedPreferences("LockCheck", Context.MODE_PRIVATE)
 
+        state = sharedPref.getBoolean("check", false)
+        binding.appLockSwitch.isChecked = state  // UI 업데이트
 
         /* TODO (SharedPreference 적용해야지  유지 될 듯?? */
         binding.appLockSwitch.setOnCheckedChangeListener { _, isChecked ->
-
             if (isChecked) {
-                state = true
+                state = isChecked
                 with(sharedPref.edit()) {
                     putBoolean("check", isChecked)
                     apply()
                 }
-
 
             } else {
                 with(sharedPref.edit()) {
@@ -48,12 +48,7 @@ class SettingActivity : AppCompatActivity() {
             }
         }
 
-        if (!state) {
-            binding.appLockSwitch.isChecked = true
-        } else {
-            binding.appLockSwitch.isChecked = false
 
-        }
 
 
     }

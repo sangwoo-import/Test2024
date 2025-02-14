@@ -76,7 +76,6 @@ class FreeTalkActivity : AppCompatActivity(), FreeTalkProvider.CallBack {
 
         /*검색창 EditText에 글자 입력 받으면 글자 삭제 버튼 보이고 없으면 삭제 버튼 안보이기 */
         binding.FamilyEventTitleSearchEditText.addTextChangedListener(object : TextWatcher {
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -87,7 +86,26 @@ class FreeTalkActivity : AppCompatActivity(), FreeTalkProvider.CallBack {
                 }
             }
 
-            override fun afterTextChanged(s: Editable?) {}
+            override fun afterTextChanged(s: Editable?) {
+                /* 이 조건은 글자 다 지웠을 때 바로 조회 안할려고 버튼 기능에 대한 역할을 줄려고 -> 그냥 글자
+                 다 지워도 되고 */
+                if(!s.isNullOrEmpty()&& s.length>1) {
+                    // 입력 실시간
+                    lastRowNUm = 0
+
+                    // 어댑터 초기화  -> 이름을 검색하던 빈값을 검색하던 한번 다시 초기화 하고 표출 하기 위해서
+                    adapter.reset()
+                    val freeTalkRequestData3 = FreeTalkRequestData(
+
+                        binding.FamilyEventTitleSearchEditText.text.toString(),
+                        pageSize,
+                        lastRowNUm
+
+                    )
+                    requestFreeTalk(freeTalkRequestData3)
+                }
+
+            }
 
         }
         )
@@ -229,7 +247,7 @@ class FreeTalkActivity : AppCompatActivity(), FreeTalkProvider.CallBack {
 
             if (resultData.isNullOrEmpty()) {
                 hasMoreData = false
-                Toast.makeText(this@FreeTalkActivity, "데이터없음", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this@FreeTalkActivity, "데이터없음", Toast.LENGTH_SHORT).show()
                 // 데이터가 없으면
 
             } else {

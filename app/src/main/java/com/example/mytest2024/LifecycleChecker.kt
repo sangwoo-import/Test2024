@@ -5,6 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -25,6 +27,9 @@ class LifecycleChecker : Application(), LifecycleEventObserver {
         // 현재 실행 중인 액티비티를 추적하기 위한 변수
         var currentActivity: FragmentActivity? = null
 
+        /* 갤러리 는 생체 인증 안하기 위한 변수 */
+        var isComingFromGallery = false
+
     }
 
     override fun onCreate() {
@@ -42,7 +47,6 @@ class LifecycleChecker : Application(), LifecycleEventObserver {
                 if (activity is FragmentActivity) {
                     if (activity !is SplashActivity) {
                         currentActivity = activity
-
 
                     }
 
@@ -92,11 +96,12 @@ class LifecycleChecker : Application(), LifecycleEventObserver {
 
 
                 // 현재 실행 중인 액티비티가 있을 때만 인증 수행
-
-                if (lockCheck) {
+                // 갤러리에 들어갔다가 바로 나올 땐 생체 x 그 이후에는 생체 o
+                if (lockCheck && !isComingFromGallery) {
                     currentActivity?.let { activity ->
                         bioAuth.authenticate(activity, activity.applicationContext)
                     } ?: Log.e(TAG, "현재 실행 중인 액티비티가 없음")
+
 
                 }
 

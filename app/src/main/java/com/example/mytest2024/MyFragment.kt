@@ -203,6 +203,8 @@ class MyFragment : Fragment(), LogoutProvider.CallBack {
 
     //  갤러리 열기
     private fun openGallery() {
+        LifecycleChecker.isComingFromGallery = true
+
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, 100)
     }
@@ -213,13 +215,17 @@ class MyFragment : Fragment(), LogoutProvider.CallBack {
 
         if (resultCode == AppCompatActivity.RESULT_OK) {
             when (requestCode) {
-                100 -> { // 갤러리 선택
+                100 -> {
+                    // 갤러리 선택
+                    // 갤러리 선택 후 돌아옴
+                    LifecycleChecker.isComingFromGallery = false // 다시 생체 인증 활성화
                     val imageUri = data?.data
                     if (imageUri != null) {
                         val savedPath = saveImageToInternalStorage(imageUri)
                         Log.d("ImagePath", "Saved at: $savedPath")
                         loadImageFromInternalStorage()
                     }
+
                 }
 
                 200 -> { // 카메라 촬영
