@@ -77,9 +77,11 @@ class FamilyEventActivity : AppCompatActivity(), FamilyEventProvider.CallBack {
         /*검색창 EditText에 글자 입력 받으면 글자 삭제 버튼 보이고 없으면 삭제 버튼 안보이기 */
         binding.FamilyEventTitleSearchEditText.addTextChangedListener(object : TextWatcher {
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
                 if (!s.isNullOrEmpty()) {
                     binding.FamilyEventCancelBtn.visibility = View.VISIBLE
                 } else {
@@ -87,6 +89,7 @@ class FamilyEventActivity : AppCompatActivity(), FamilyEventProvider.CallBack {
                 }
             }
             override fun afterTextChanged(s: Editable?) {
+
                 /* 이 조건은 글자 다 지웠을 때 바로 조회 안할려고 버튼 기능에 대한 역할을 줄려고 -> 그냥 글자
                  다 지워도 되고 */
                 if(!s.isNullOrEmpty()&& s.length>1) {

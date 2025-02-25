@@ -33,6 +33,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mytest2024.swaggerapi.LoginUserInformation
 import com.example.mytest2024.swaggerapi.Retrofit.LogoutRequestData
 import com.example.mytest2024.databinding.MyFragmentBinding
+import com.example.mytest2024.rxdebounce.RxDebounce
 import com.example.mytest2024.swaggerapi.swaggercontroller.LogoutProvider
 import java.io.File
 import java.io.FileOutputStream
@@ -48,6 +49,7 @@ class MyFragment : Fragment(), LogoutProvider.CallBack {
     private val logoutProvider = LogoutProvider(this@MyFragment)
     private var codeA: String = ""
     private var messageA: String = ""
+
 
 
     override fun onCreateView(
@@ -203,8 +205,6 @@ class MyFragment : Fragment(), LogoutProvider.CallBack {
 
     //  갤러리 열기
     private fun openGallery() {
-        LifecycleChecker.isComingFromGallery = true
-
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, 100)
     }
@@ -216,9 +216,6 @@ class MyFragment : Fragment(), LogoutProvider.CallBack {
         if (resultCode == AppCompatActivity.RESULT_OK) {
             when (requestCode) {
                 100 -> {
-                    // 갤러리 선택
-                    // 갤러리 선택 후 돌아옴
-                    LifecycleChecker.isComingFromGallery = false // 다시 생체 인증 활성화
                     val imageUri = data?.data
                     if (imageUri != null) {
                         val savedPath = saveImageToInternalStorage(imageUri)

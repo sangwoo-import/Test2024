@@ -97,7 +97,7 @@ class LifecycleChecker : Application(), LifecycleEventObserver {
 
                 // 현재 실행 중인 액티비티가 있을 때만 인증 수행
                 // 갤러리에 들어갔다가 바로 나올 땐 생체 x 그 이후에는 생체 o
-                if (lockCheck && !isComingFromGallery) {
+                if (lockCheck) {
                     currentActivity?.let { activity ->
                         bioAuth.authenticate(activity, activity.applicationContext)
                     } ?: Log.e(TAG, "현재 실행 중인 액티비티가 없음")

@@ -3,32 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-
-
     <uses-permission android:name="android.permission.INTERNET" />
     <!--    Http 보안 정책-->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 
-<!--    지문 권한-->
+    <!--    지문 권한-->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
-<!--    생체 정보 권한-->
+    <!--    생체 정보 권한-->
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
 
 
-
-
-
-
     <!--    갤러리 및 사진 촬영 저장-->
-    <uses-permission android:name="android.permission.CAMERA"
+    <uses-permission
+        android:name="android.permission.CAMERA"
         tools:ignore="PermissionImpliesUnsupportedChromeOsHardware" />
-<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
-<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
+    <!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>-->
+    <!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>-->
 
-<!--    android:name -> background에서 foreground 처리할려고-->
+    <!--    android:name -> background에서 foreground 처리할려고-->
     <application
         android:name=".LifecycleChecker"
         android:allowBackup="true"
@@ -40,11 +35,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTest2024"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31"
-        tools:ignore="Instantiatable">
+        tools:ignore="Instantiatable"
+        tools:targetApi="31">
 
 
-<!--        사진 provider 설정-->
+        <!--        갤러리 및 카메라 provider 설정-->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.mytest2024.fileprovider"
@@ -54,6 +49,17 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <service
+            android:name=".firebase.PushService"
+            android:enabled="true"
+            android:exported="false">
+
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+
+        </service>
 
 
         <activity
@@ -89,30 +95,38 @@
             android:name="com.example.mytest2024.LetterActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
-        <activity android:name="com.example.mytest2024.FreeTalkActivity"
+        <activity
+            android:name="com.example.mytest2024.FreeTalkActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.mytest2024.BoardDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.BoardDetailActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.mytest2024.FamilyEventActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.FamilyEventActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.mytest2024.BoardDetailFamilyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.BoardDetailFamilyActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.mytest2024.SurveyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.SurveyActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.mytest2024.SurveyDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.SurveyDetailActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.mytest2024.LetterDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.LetterDetailActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
-        <activity android:name="com.example.mytest2024.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.mytest2024.SettingActivity"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

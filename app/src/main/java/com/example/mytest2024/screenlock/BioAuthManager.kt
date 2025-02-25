@@ -140,21 +140,23 @@ class BioAuthManager {
                         ) {
                             super.onAuthenticationError(errorCode, errString)
                             Log.d("bioAuth", errString.toString() + " " + errorCode.toString())
-                            /* 다시 띄우기*/
 
+
+                            /* 다시 띄우기*/
                             /*취소 버튼 눌렀을 때*/
                             if(errString.equals("취소")){
+                                activity.moveTaskToBack(true)
 
                             }
 
-                            /* 뒤로가기 버튼 눌렀을 때*/
+                            /* 뒤로가기 버튼 눌렀을 때 or 백그라운드로 갈 때*/
                             if (errString.equals("인증이 취소되었습니다.")) {
                                 activity.moveTaskToBack(true)
-
                             }
                             /*입력 많이 눌러서 나오는 거 */
                             if (errString.equals("시도 횟수가 너무 많습니다. 나중에 다시 시도하세요.")) {
                                 activity.finish()
+
 
                             }
                         }

@@ -1,5 +1,6 @@
 package com.example.mytest2024.swaggerapi.swaggercontroller
 
+import android.annotation.SuppressLint
 import androidx.databinding.Observable
 import androidx.databinding.PropertyChangeRegistry
 import androidx.lifecycle.LiveData
@@ -7,10 +8,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.example.mytest2024.swaggerapi.Retrofit.CommonResponseData
+import com.example.mytest2024.swaggerapi.Retrofit.FileListData
 import com.example.mytest2024.swaggerapi.Retrofit.LetterDetailRequestData
 import com.example.mytest2024.swaggerapi.Retrofit.LetterDetailResponse
 import com.example.mytest2024.swaggerapi.Retrofit.RetrofitManager
 import retrofit2.Response
+import java.io.File
 
 class LetterDetailProvider : ViewModel(), Observable {
 
@@ -22,9 +25,12 @@ class LetterDetailProvider : ViewModel(), Observable {
         _getLetterDetailResponse
 
 
-    private val _letterDetail = MutableLiveData<LetterDetailResponse?>()
-    val letterDetail: LiveData<LetterDetailResponse?> = _letterDetail
+    private val _letterDetail = MutableLiveData<LetterDetailResponse>()
+    val letterDetail: LiveData<LetterDetailResponse> = _letterDetail
 
+
+    private val _letterDetail_fileName = MutableLiveData<FileListData>()
+    val letterDetailFileName: LiveData<FileListData> = _letterDetail_fileName
 
 
     fun letterDetailGo(letterDetailRequestData: LetterDetailRequestData) {
@@ -39,8 +45,15 @@ class LetterDetailProvider : ViewModel(), Observable {
                         if (response.isSuccessful) {
                             _getLetterDetailResponse.value = response.body()
 
-                            _letterDetail.value = response.body()?.resultData?.firstOrNull()
-                            notifyChange()
+                            _letterDetail.value =
+                                _getLetterDetailResponse.value?.resultData?.firstOrNull()
+
+//                            if(_letterDetail.value?.fileList.isNullOrEmpty()){
+//                                _letterDetail_fileName.postValue(null)
+//                            }
+
+                            _letterDetail_fileName.value = _letterDetail.value?.fileList?.firstOrNull()
+
 
                         }
                     }
@@ -55,26 +68,18 @@ class LetterDetailProvider : ViewModel(), Observable {
                 }
             )
     }
-    private val callbacks = PropertyChangeRegistry()
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
 
-        callbacks.add(callback)
+
+    private val callbacks: PropertyChangeRegistry = PropertyChangeRegistry()
+
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+        callback?.let { callbacks.add(it) }
     }
 
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
-    callbacks.remove(callback)
-
+        callback?.let { callbacks.remove(it) }
     }
     fun notifyChange() {
         callbacks.notifyCallbacks(this, 0, null)
     }
-
-//    interface CallBack {
-//        fun completeLetterDetail(
-//            code: String,
-//            msg: String,
-//            resultData: List<LetterDetailResponse>,
-//            fileListData: List<FileListData>
-//        )
-//    }
 }

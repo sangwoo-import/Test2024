@@ -3,10 +3,12 @@ package com.example.mytest2024
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,10 +18,18 @@ import com.example.mytest2024.swaggerapi.Retrofit.SearchPerson
 import com.example.mytest2024.swaggerapi.Retrofit.SearchPersonRequestData
 import com.example.mytest2024.RecyclerView.SearchPersonRecylerViewAdapter
 import com.example.mytest2024.databinding.SearchFragmentBinding
+import com.example.mytest2024.rxdebounce.RxDebounce
+import com.jakewharton.rxbinding4.widget.textChanges
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
 
     private lateinit var binding: SearchFragmentBinding
+
 
     private lateinit var adapter: SearchPersonRecylerViewAdapter
     private val searchPersonProvider = SearchPersonProvider(this@SearchFragment)
@@ -81,12 +91,16 @@ class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
         binding.progressBarLinearLayout.visibility = View.VISIBLE
 
 
-        /*검색창 EditText에 글자 입력 받으면 글자 삭제 버튼 보이고 없으면 삭제 버튼 안보이기 */
+
+
         binding.searchPersonEditText.addTextChangedListener(object : TextWatcher {
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                Log.d("before", s.toString())
+            }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Log.d("middle", s.toString())
                 if (!s.isNullOrEmpty()) {
                     binding.serachCancleBtn.visibility = View.VISIBLE
                 } else {
@@ -97,14 +111,14 @@ class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                /* 이 조건은 글자 다 지웠을 때 바로 조회 안 할려고 버튼 기능에 대한 역할을 줄려고 -> 그냥 글자
-                                 다 지워도 되고 */
-
-                // 입력 실시간
+                Log.d("after", s.toString())
+                // 입력 실시간 page 초기화
                 lastRowNUm = 0
 
                 // 어댑터 초기화  -> 이름을 검색하던 빈값을 검색하던 한번 다시 초기화 하고 표출 하기 위해서
                 adapter.reset()
+
+
                 val searchPersonRequestDataSet3 = SearchPersonRequestData(
                     s.toString(),
                     searchType,
@@ -112,13 +126,11 @@ class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
                     lastRowNUm
 
                 )
+
                 requestSearchPerson(searchPersonRequestDataSet3)
 
             }
-
-        }
-
-        )
+        })
 
 
         /* EditText 적힌거 다 삭제 */
@@ -237,6 +249,8 @@ class SearchFragment : Fragment(), SearchPersonProvider.CallBack {
 
         return binding.root // root는 contraint 전체를 뜻한다
     }
+
+
 
     fun requestSearchPerson(searchPersonRequestDataSet: SearchPersonRequestData) {
         searchPersonProvider.SearchPersonGo(searchPersonRequestDataSet)

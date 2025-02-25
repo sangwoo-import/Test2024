@@ -197,7 +197,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
             android:textColor="@color/black"
-            android:text="파일"
+            android:text="@{viewModel.letterDetailFileName!=null? viewModel.letterDetailFileName.fileName : `데이터없음`}"
             android:textSize="14dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/filenameShow"

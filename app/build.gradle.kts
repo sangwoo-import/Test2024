@@ -1,7 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
+
 }
+
+
 
 android {
     namespace = "com.example.mytest2024"
@@ -98,10 +102,22 @@ dependencies {
 
     /* LifeCycle 감지 */
     implementation ("androidx.lifecycle:lifecycle-process:2.5.1")
-    
+
+
+    /* RxJava */
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation ("io.reactivex.rxjava3:rxjava:3.0.6")
+    implementation ("io.reactivex.rxjava3:rxkotlin:3.0.1")
+
+    /* Rx binding*/
+    implementation ("com.jakewharton.rxbinding4:rxbinding:4.0.0")
 
 
 
+    /*Firebase*/
 
+    implementation(platform("com.google.firebase:firebase-bom:33.9.0"))
+    implementation("com.google.firebase:firebase-analytics")
+    implementation ("com.google.firebase:firebase-messaging:24.1.0")
 
 }
