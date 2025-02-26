@@ -7,12 +7,15 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.media.RingtoneManager
 import android.os.Build
+import android.os.PowerManager
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.VISIBILITY_PRIVATE
 import androidx.core.content.edit
+import com.example.mytest2024.LoginActivity
 import com.example.mytest2024.MainActivity
 import com.example.mytest2024.R
 import com.google.firebase.messaging.FirebaseMessaging
@@ -22,12 +25,9 @@ import kotlinx.coroutines.flow.SharedFlow
 
 class PushService : FirebaseMessagingService() {
 
-
-
-
-
-    private val TAG = "FirebaseService"
-
+    companion object {
+        private const val TAG = "MyFirebaseMsgService"
+    }
     override fun onNewToken(token: String) {
         super.onNewToken(token)
 
@@ -37,8 +37,7 @@ class PushService : FirebaseMessagingService() {
         with(pref.edit()) {
             putString("token", token).apply()
         }
-
-
+        sendRegistrationToServer(token)
     }
 
 
@@ -52,6 +51,11 @@ class PushService : FirebaseMessagingService() {
         }
     }
 
+    // 타사 서버에 토큰을 유지해주는 메서드이다.
+    private fun sendRegistrationToServer(token: String?) {
+        Log.d(TAG , "sendRegistrationTokenToServer($token)")
+    }
+
 
     private fun sendNotification(message: RemoteMessage) {
 
@@ -60,7 +64,7 @@ class PushService : FirebaseMessagingService() {
 
         // 일회용 PendingIntent
         // PendingIntent : Intent 의 실행 권한을 외부의 어플리케이션에게 위임한다.
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) // Activity Stack 을 경로만 남긴다. A-B-C-D-B => A-B
         val pendingIntent = PendingIntent.getActivity(
             this, uniId, intent,
@@ -79,8 +83,11 @@ class PushService : FirebaseMessagingService() {
             .setContentTitle(message.data["body"].toString()) // 제목
             .setContentText(message.data["title"].toString()) // 메시지 내용
             .setAutoCancel(true)
+            .setChannelId(channelId)
+            .setVisibility(VISIBILITY_PRIVATE)
             .setSound(soundUri) // 알림 소리
             .setContentIntent(pendingIntent) // 알림 실행 시 Intent
+            //.setFullScreenIntent(pendingIntent,true)  // 앱 잠금화면 강제 깨우기
 
 
         val notificationManager =
@@ -90,13 +97,33 @@ class PushService : FirebaseMessagingService() {
         // 오레오 버전 이후에는 채널이 필요하다.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel =
-                NotificationChannel(channelId, "Notice", NotificationManager.IMPORTANCE_DEFAULT)
+                NotificationChannel(channelId, "Notice", NotificationManager.IMPORTANCE_HIGH).apply {
+                    setShowBadge(true)
+                    lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+
+                }
             notificationManager.createNotificationChannel(channel)
         }
 
         // 알림 생성
         notificationManager.notify(uniId, notificationBuilder.build())
 
+        wakeScreen()
+
+
+    }
+
+
+
+    private fun wakeScreen() {
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        val wakeLock = powerManager.newWakeLock(
+            PowerManager.ACQUIRE_CAUSES_WAKEUP or
+                    PowerManager.ON_AFTER_RELEASE,
+            "MyApp:WakeLock"
+        ).apply {
+            acquire(2000)  // 🔹 3초 동안 화면 깨우기
+        }
 
     }
 

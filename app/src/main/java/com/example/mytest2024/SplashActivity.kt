@@ -23,16 +23,6 @@ class SplashActivity : AppCompatActivity() {
         binding = SplashActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // FirebaseMessaging에서 토큰을 가져오는 방식으로 변경
-        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val token = task.result
-                Log.d("FCM Token", token)
-                // 토큰을 서버에 전송하는 코드 추가 가능
-            } else {
-                Log.e("FCM Token", "토큰 가져오기 실패", task.exception)
-            }
-        }
 
         // 타이머가 끝나면 내부 실행
         //TODO("Coroutine으로 변경해보기")

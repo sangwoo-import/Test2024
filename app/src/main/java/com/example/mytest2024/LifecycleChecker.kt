@@ -13,6 +13,8 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.example.mytest2024.screenlock.BioAuthManager
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 
 class LifecycleChecker : Application(), LifecycleEventObserver {
 
@@ -21,6 +23,7 @@ class LifecycleChecker : Application(), LifecycleEventObserver {
 
     companion object {
         private var TAG = "LifeCycleShow"
+        private val TAG1 = "FirebaseService"
 
         var isBackground = false
 
@@ -34,6 +37,8 @@ class LifecycleChecker : Application(), LifecycleEventObserver {
 
     override fun onCreate() {
         super.onCreate()
+
+        setPushAlert()
 
         // 생명 주기 관찰 등록
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
@@ -131,6 +136,20 @@ class LifecycleChecker : Application(), LifecycleEventObserver {
 
 
             else -> {}
+        }
+    }
+
+
+    private fun setPushAlert() {
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener {
+            if (!it.isSuccessful) {
+                return@addOnCompleteListener
+            } else {
+                Log.e(TAG1, "FCM Token : ${it.result}")
+            }
+        }.addOnFailureListener {
+            Toast.makeText(this, "네트워크를 확인해주세요", Toast.LENGTH_SHORT).show()
         }
     }
 }
